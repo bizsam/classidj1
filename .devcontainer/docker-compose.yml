@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  classifiedads:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    hostname: classifiedads
+    environment:
+      PROJECT_RUN: "/data"
+      TESTING: 'True'
+      DEBUG: 'True'
+    volumes:
+      - ..:/classifiedads
+      - classifiedads-data:/data
+    networks:
+      - default
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+
+networks:
+    default:
+        
+volumes:
+  classifiedads-data:

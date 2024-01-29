@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.191.0/containers/docker-existing-dockerfile
+{
+    "name": "classifiedads",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "classifiedads",
+    "workspaceFolder": "/classifiedads",
+    "portsAttributes": {
+        "8000": {
+            "label": "Django server",
+            "onAutoForward": "notify",
+        },
+    },
+    "postCreateCommand": [
+        "bash",
+        ".devcontainer/scripts/hook_create.sh"
+    ],
+    "postAttachCommand": [
+        "bash",
+        ".devcontainer/scripts/hook_attach.sh"
+    ],
+    "remoteEnv": {
+        "EDITOR": "code -w", // Small trick to automatically open git commit messages in vscode
+    },
+    "settings": {
+        "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
+        "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
+        "python.terminal.activateEnvironment": false, // Conflicts with some tasks
+    },
+    // Extensions included here are automatically installed,
+    // Only include the most essential.
+    "extensions": [
+        "donjayamanne.python-extension-pack", // All your python needs
+        "njpwerner.autodocstring", // Generate docstrings for python functions
+        "mikestead.dotenv", // .env file syntax highlighting
+        "tamasfe.even-better-toml", // pipenv syntax highlighting
+    ],
+}
